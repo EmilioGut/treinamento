@@ -1,6 +1,5 @@
 // package exercicios.exercicio04;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AppConta {

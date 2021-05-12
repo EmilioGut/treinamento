@@ -1,61 +1,50 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GerenciaContas {
-    private ArrayList<Conta> contas;
+    private HashMap<Integer, Conta> contas;
 
     public GerenciaContas() {
-        contas = new ArrayList<>();
+        contas = new HashMap<>();
     }
 
     public void novaContaCorrente(int numeroConta) {
-/*         ContaCorrente cc = null;
-        cc = new ContaCorrente(numeroConta);
-        contas.add(cc); */
-        contas.add(new ContaCorrente(numeroConta));
+        contas.put(numeroConta, new ContaCorrente(numeroConta));
     }
 
     public void novaContaEspecial(int numeroConta, double limite) {
-        contas.add(new ContaEspecial(numeroConta, limite));
+        contas.put(numeroConta, new ContaEspecial(numeroConta, limite));
     }
 
     public void novaContaPoupanca(int numeroConta) {
-        contas.add(new ContaPoupanca(numeroConta));
+        contas.put(numeroConta, new ContaPoupanca(numeroConta));
     }
 
     public boolean fazerDeposito(int numeroConta, double valor) {
-        for (Conta objConta : contas) {
-            if (objConta.getNumero() == numeroConta) {
-                if (objConta.deposito(valor)) {
-                    return true;
-                } else {
-                    return false; // não conseguiu fazer o depósito
-                }
-            }
-        }
+        Conta objConta = contas.get(numeroConta);
+
+        if (objConta != null) {
+            return objConta.deposito(valor);
+        }       
         return false; // não achou a conta
     }
 
     public boolean fazerSaque(int numeroConta, double valor) {
-        for (Conta objConta : contas) {
-            if (objConta.getNumero() == numeroConta) {
-                if (objConta.saque(valor)) {
-                    return true;
-                } else {
-                    return false; // não conseguiu fazer o depósito
-                }
-            }
+        Conta objConta = contas.get(numeroConta);
+
+        if (objConta != null) {
+            return objConta.saque(valor);
         }
         return false; // não achou a conta
     }
 
     public String exibirSaldo(int numeroConta) {
-        for (Conta objConta : contas) {
-            if (objConta.getNumero() == numeroConta) {
-                return objConta.toString();
-            }
+        Conta objConta = contas.get(numeroConta);
+
+        if (objConta != null) {
+            return objConta.toString();
         }
+      
         return "Conta não encontrada";
     }
-
 
 }
