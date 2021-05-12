@@ -1,4 +1,4 @@
-package exercicios.exercicio04;
+// package exercicios.exercicio04;
 
 public class ContaPoupanca extends Conta{
     private static double taxa; // atributo de classe
